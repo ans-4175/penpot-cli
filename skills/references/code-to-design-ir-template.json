@@ -1,0 +1,34 @@
+{
+  "route": "/example",
+  "viewport": { "width": 1440, "height": 900 },
+  "evidence": {
+    "sourceFiles": ["src/app/example/page.tsx"],
+    "tailwindConfig": "tailwind.config.ts",
+    "visualReference": "optional screenshot path or running route"
+  },
+  "tokens": {
+    "color": [{ "name": "color/brand/primary", "value": "#...", "evidence": "bg-brand-..." }],
+    "typography": [{ "name": "type/heading/lg", "value": "...", "evidence": "text-... font-..." }],
+    "spacing": [{ "name": "space/6", "value": "...", "evidence": "p-6/gap-6" }],
+    "radius": [{ "name": "radius/card", "value": "...", "evidence": "rounded-xl" }],
+    "shadow": [{ "name": "shadow/card", "value": "...", "evidence": "shadow-lg" }]
+  },
+  "components": [
+    {
+      "source": "Button",
+      "penpotName": "Button / Primary",
+      "purpose": "Primary action",
+      "variants": ["default", "disabled"],
+      "slots": ["label", "leading icon"]
+    }
+  ],
+  "screen": {
+    "boardName": "Example — Desktop",
+    "sections": [
+      { "name": "Header", "source": "Header", "components": ["Nav / Desktop"] },
+      { "name": "Main content", "source": "ExamplePage", "components": ["Card / Summary"] }
+    ]
+  },
+  "assumptions": ["Dynamic account data is represented with fixture content."],
+  "qa": ["Capture running route at 1440x900", "Export matching Penpot board and compare folds"]
+}

@@ -1,0 +1,21 @@
+const pg = penpotUtils.getPageByName("Carousel"); await penpot.openPage(pg);
+if (penpot.currentPage.id !== pg.id) throw new Error('page aktif salah');
+if (penpot.root.children.some(c => c.name.startsWith('Slide 5 '))) throw new Error('Slide 5 sudah ada');
+
+const s = SLIDE('Slide 5 - Closing', 4800, true, '5', '5');
+const ft = penpotUtils.findShapes(x => x.name === 'Footer URL', s)[0];
+ft.characters = 'yourname.com · @yourhandle'; ft.growType = 'auto-width';
+BOX(s, { name: 'Spacer', w: 920, h: 250 });
+const st = BOX(s, { name: 'Statement', w: 920, gap: 0, ai: 'center' });
+TXT(st, 'Trends change.', { wt: 600, size: 64, ls: -1.8, lh: 1.1, color: C.foot, name: 'Q1a' });
+TXT(st, 'Tools change.', { wt: 600, size: 64, ls: -1.8, lh: 1.1, color: C.foot, name: 'Q1b' });
+const q = BOX(st, { name: 'Question', w: 920, gap: 6, ai: 'center', pad: [56, 0, 0, 0] });
+TXT(q, 'So what\u2019s actually', { wt: 800, size: 96, ls: -3.2, lh: 1.05, color: C.white, name: 'Q2' });
+const mr = BOX(q, { name: 'Q3 Row', dir: 'row', ai: 'center', pad: [12, 0, 0, 0] });
+MARK(mr, 'yours?', 110, -1.5);
+const an = BOX(st, { name: 'Answer', w: 920, gap: 0, ai: 'center', pad: [64, 0, 0, 0] });
+TXT(an, 'The system. The craft.', { wt: 800, size: 44, color: C.white, name: 'Answer text' });
+await wait(200); await SETTLE(s); await ROT();
+const kids = s.children.filter(c => c.name !== 'Footer URL' && c.name !== 'Page Number');
+const last = kids[kids.length - 1];
+return { id: s.id, bottom: Math.round(last.y + last.height - s.y), tiny: penpotUtils.findShapes(x => x.type === 'text' && (x.width <= 1.5 || x.height > 5000), s).length };

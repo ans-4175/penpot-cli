@@ -1,0 +1,16 @@
+const pg = penpotUtils.getPageByName("Carousel"); await penpot.openPage(pg);
+if (penpot.currentPage.id !== pg.id) throw new Error('page aktif salah');
+if (penpot.root.children.some(c => c.name.startsWith('Slide 1 '))) throw new Error('Slide 1 sudah ada');
+const s = SLIDE('Slide 1 - Hook', 0, false, '1', '5');
+CHIP(s, 'HOW I BUILD DESIGN SYSTEMS');
+const sp = BOX(s, { name: 'Spacer', w: 'fill', h: 120 });
+const t1 = TXT(s, 'The library is', { wt: 800, size: 128, ls: -4, lh: 1.02, color: C.ink, w: 'fill', name: 'Title 1' });
+const t2 = TXT(s, 'the product.', { wt: 800, size: 128, ls: -4, lh: 1.02, color: C.ink, w: 'fill', name: 'Title 2' });
+const row = BOX(s, { name: 'Title Row', dir: 'row', ai: 'center', pad: [28, 0, 0, 0] });
+MARK(row, 'The system', 112, -1);
+const t3 = TXT(s, 'makes it scale.', { wt: 800, size: 112, ls: -3.4, lh: 1.05, color: C.ink, name: 'Title 3' });
+const sw = BOX(s, { name: 'Swipe', dir: 'row', gap: 14, ai: 'center', pad: [56, 0, 0, 0] });
+TXT(sw, 'Swipe: what a system is made of', { wt: 700, size: 32, color: C.sub, name: 'Swipe text' });
+ICON(sw, 'arrow-right', 36, C.accent);
+await wait(200); await SETTLE(s); await ROT();
+return { id: s.id, w: Math.round(s.width), h: Math.round(s.height) };

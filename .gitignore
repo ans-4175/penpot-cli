@@ -1,0 +1,20 @@
+# Build artifacts
+/penpot-cli
+/penpot-cli.exe
+/dist/
+*.exe
+*.test
+
+# Python
+__pycache__/
+*.pyc
+
+# QA scratch
+.qa/
+*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
